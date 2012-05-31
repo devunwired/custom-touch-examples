@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.examples.customtouch"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk android:minSdkVersion="8" />
+
+    <application
+        android:icon="@drawable/ic_launcher"
+        android:label="Touch Examples"
+        android:theme="@android:style/Theme.Black.NoTitleBar" >
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".CustomTouchActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TouchForwardActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".GestureDetectActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TwoDimensionScrollActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".TouchDelegateActivity"
+            android:screenOrientation="portrait"/>
+    </application>
+
+</manifest>
