@@ -4,6 +4,8 @@
 # generated files
 bin/
 gen/
+out/
 
-# Local configuration file (sdk path, etc)
+# Local IDE/build configuration files (sdk path, etc)
 local.properties
+.idea/workspace.xml

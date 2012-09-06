@@ -2,57 +2,51 @@ package com.examples.customtouch;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
-import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
 import android.widget.Scroller;
 
-public class TwoDimensionScrollView extends FrameLayout {
+public class TwoDimensionGestureScrollView extends FrameLayout {
 
-    //Fling components
+	private GestureDetector mDetector;
 	private Scroller mScroller;
-    private VelocityTracker mVelocityTracker;
-
+	
 	/* Positions of the last motion event */
-	private float mLastTouchX, mLastTouchY;
+	private float mInitialX, mInitialY;
 	/* Drag threshold */
 	private int mTouchSlop;
-    /* Fling Velocity */
-    private int mMaximumVelocity, mMinimumVelocity;
-    /* Drag Lock */
-    private boolean mDragging = false;
-
-	public TwoDimensionScrollView(Context context) {
+	
+	public TwoDimensionGestureScrollView(Context context) {
 		super(context);
 		init(context);
 	}
 
-	public TwoDimensionScrollView(Context context, AttributeSet attrs) {
+	public TwoDimensionGestureScrollView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		init(context);
 	}
 
-	public TwoDimensionScrollView(Context context, AttributeSet attrs, int defStyle) {
+	public TwoDimensionGestureScrollView(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
 		init(context);
 	}
 
 	private void init(Context context) {
+		mDetector = new GestureDetector(context, mListener);
 		mScroller = new Scroller(context);
-		mVelocityTracker = VelocityTracker.obtain();
-        //Get system constants for touch thresholds
+		//Get system constants for touch thresholds
 		mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
-        mMaximumVelocity = ViewConfiguration.get(context).getScaledMaximumFlingVelocity();
-        mMinimumVelocity = ViewConfiguration.get(context).getScaledMinimumFlingVelocity();
 	}
 
     /*
-     * Override the measureChild... implementations to guarantee that the child view
-     * gets measured to be as large as it wants to be.  The default implementation will
-     * force some children to be only as large as this view.
-     */
+    * Override the measureChild... implementations to guarantee that the child view
+    * gets measured to be as large as it wants to be.  The default implementation will
+    * force some children to be only as large as this view.
+    */
     @Override
     protected void measureChild(View child, int parentWidthMeasureSpec, int parentHeightMeasureSpec) {
         int childWidthMeasureSpec;
@@ -76,6 +70,29 @@ public class TwoDimensionScrollView extends FrameLayout {
 
         child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
     }
+
+    //Listener to handle all the touch events
+	private SimpleOnGestureListener mListener = new SimpleOnGestureListener() {
+		public boolean onDown(MotionEvent e) {
+			//Cancel any current fling
+            if (!mScroller.isFinished()) {
+				mScroller.abortAnimation();
+			}
+			return true;
+		}
+		
+		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+			//Call a helper method to start the scroller animation
+            fling((int)-velocityX/3, (int)-velocityY/3);
+			return true;
+		}
+		
+		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+			//Any view can be scrolled by simply calling its scrollBy() method
+			scrollBy((int)distanceX, (int)distanceY);
+			return true;
+		}
+	};
 	
 	@Override
 	public void computeScroll() {
@@ -118,42 +135,28 @@ public class TwoDimensionScrollView extends FrameLayout {
 
     /*
      * Monitor touch events passed down to the children and
-     * intercept as soon as it is determined we are dragging.  This
-     * allows child views to still receive touch events if they are
-     * interactive (i.e. Buttons)
+     * intercept as soon as it is determined we are dragging
      */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                //Stop any flinging in progress
-                if (!mScroller.isFinished()) {
-                    mScroller.abortAnimation();
-                }
-                //Reset the velocity tracker
-                mVelocityTracker.clear();
-                mVelocityTracker.addMovement(event);
-                //Save the initial touch point
-                mLastTouchX = event.getX();
-                mLastTouchY = event.getY();
+                mInitialX = event.getX();
+                mInitialY = event.getY();
+                //Feed the down event to the detector so it has
+                // context when/if dragging begins
+                mDetector.onTouchEvent(event);
                 break;
             case MotionEvent.ACTION_MOVE:
                 final float x = event.getX();
                 final float y = event.getY();
-                final int yDiff = (int) Math.abs(y - mLastTouchY);
-                final int xDiff = (int) Math.abs(x - mLastTouchX);
+                final int yDiff = (int) Math.abs(y - mInitialY);
+                final int xDiff = (int) Math.abs(x - mInitialX);
                 //Verify that either difference is enough to be a drag
                 if (yDiff > mTouchSlop || xDiff > mTouchSlop) {
-                    mDragging = true;
-                    mVelocityTracker.addMovement(event);
-                    //Start capturing events ourselves
+                    //Start capturing events
                     return true;
                 }
-                break;
-            case MotionEvent.ACTION_CANCEL:
-            case MotionEvent.ACTION_UP:
-                mDragging = false;
-                mVelocityTracker.clear();
                 break;
         }
 
@@ -166,51 +169,7 @@ public class TwoDimensionScrollView extends FrameLayout {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        mVelocityTracker.addMovement(event);
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                // We've already stored the initial point,
-                // but if we got here a child view didn't capture
-                // the event, so we need to.
-                return true;
-            case MotionEvent.ACTION_MOVE:
-                final float x = event.getX();
-                final float y = event.getY();
-                float deltaY = mLastTouchY - y;
-                float deltaX = mLastTouchX - x;
-                //Check for slop on direct events
-                if (!mDragging && (Math.abs(deltaY) > mTouchSlop || Math.abs(deltaX) > mTouchSlop) ) {
-                    mDragging = true;
-                }
-                if (mDragging) {
-                    //Scroll the view
-                    scrollBy((int) deltaX, (int) deltaY);
-                    //Update the last touch event
-                    mLastTouchX = x;
-                    mLastTouchY = y;
-                }
-                break;
-            case MotionEvent.ACTION_CANCEL:
-                mDragging = false;
-                //Stop any flinging in progress
-                if (!mScroller.isFinished()) {
-                    mScroller.abortAnimation();
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                mDragging = false;
-                // Compute the current velocity and start a fling if it is above
-                // the minimum threshold.
-                mVelocityTracker.computeCurrentVelocity(1000, mMaximumVelocity);
-                int velocityX = (int)mVelocityTracker.getXVelocity();
-                int velocityY = (int)mVelocityTracker.getYVelocity();
-                if (Math.abs(velocityX) > mMinimumVelocity || Math.abs(velocityY) > mMinimumVelocity) {
-                    fling(-velocityX, -velocityY);
-                }
-                break;
-        }
-        return super.onTouchEvent(event);
+        return mDetector.onTouchEvent(event);
     }
 	
 	/*
@@ -222,7 +181,7 @@ public class TwoDimensionScrollView extends FrameLayout {
             int width = getWidth() - getPaddingLeft() - getPaddingRight();
             int bottom = getChildAt(0).getHeight();
             int right = getChildAt(0).getWidth();
-    
+
             mScroller.fling(getScrollX(), getScrollY(), velocityX, velocityY,
             		0, Math.max(0, right - width),
             		0, Math.max(0, bottom - height));
