@@ -15,8 +15,8 @@ import android.widget.ArrayAdapter;
 
 public class MainActivity extends ListActivity implements OnItemClickListener {
 
-	private static final String[] ITEMS = {"Custom Touch Example", "Touch Forwarding Example",
-		"GestureDetector Example", "Pan/Zoom Gesture Example", "Touch Delegate Example"};
+	private static final String[] ITEMS = {"Pan Example", "Pan Gesture Example",
+		"Multi-Touch Example", "Multi-Touch Gesture Example", "Touch Forward Example", "Touch Delegate Example"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,24 +28,27 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		switch(position) {
-		case 0: //Custom Touch
-			startActivity(new Intent(this, CustomTouchActivity.class));
-			break;
-		case 1: //Touch Forward
-			startActivity(new Intent(this, TouchForwardActivity.class));
-			break;
-		case 2: //GestureDetector
-			startActivity(new Intent(this, GestureDetectActivity.class));
-			break;
-		case 3: //2D Scrolling
-			startActivity(new Intent(this, TwoDimensionScrollActivity.class));
-			break;
-		case 4: //Touch Delegate
-			startActivity(new Intent(this, TouchDelegateActivity.class));
-			break;
-		default:
-			break;
-		}
-	}
+        switch (position) {
+            case 0: //2D Scrolling
+                startActivity(new Intent(this, TwoDimensionScrollActivity.class));
+                break;
+            case 1: //2D GestureDetector Scrolling
+                startActivity(new Intent(this, TwoDimensionGestureScrollActivity.class));
+                break;
+            case 2: //Multi-Touch Image View
+                startActivity(new Intent(this, MultitouchActivity.class));
+                break;
+            case 3: //Multi-Touch Gesture Image View
+                startActivity(new Intent(this, MultitouchGestureActivity.class));
+                break;
+            case 4: //Touch Forwarding
+                startActivity(new Intent(this, TouchForwardActivity.class));
+                break;
+            case 5: //Touch Delegate
+                startActivity(new Intent(this, TouchDelegateActivity.class));
+                break;
+            default:
+                break;
+        }
+    }
 }

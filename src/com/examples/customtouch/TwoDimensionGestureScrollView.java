@@ -8,12 +8,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
-import android.widget.Scroller;
+import android.widget.OverScroller;
 
 public class TwoDimensionGestureScrollView extends FrameLayout {
 
 	private GestureDetector mDetector;
-	private Scroller mScroller;
+	private OverScroller mScroller;
 	
 	/* Positions of the last motion event */
 	private float mInitialX, mInitialY;
@@ -37,7 +37,7 @@ public class TwoDimensionGestureScrollView extends FrameLayout {
 
 	private void init(Context context) {
 		mDetector = new GestureDetector(context, mListener);
-		mScroller = new Scroller(context);
+		mScroller = new OverScroller(context);
 		//Get system constants for touch thresholds
 		mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
 	}

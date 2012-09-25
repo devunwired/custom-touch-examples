@@ -7,12 +7,12 @@ import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.FrameLayout;
-import android.widget.Scroller;
+import android.widget.OverScroller;
 
 public class TwoDimensionScrollView extends FrameLayout {
 
     //Fling components
-	private Scroller mScroller;
+	private OverScroller mScroller;
     private VelocityTracker mVelocityTracker;
 
 	/* Positions of the last motion event */
@@ -40,7 +40,7 @@ public class TwoDimensionScrollView extends FrameLayout {
 	}
 
 	private void init(Context context) {
-		mScroller = new Scroller(context);
+		mScroller = new OverScroller(context);
 		mVelocityTracker = VelocityTracker.obtain();
         //Get system constants for touch thresholds
 		mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
