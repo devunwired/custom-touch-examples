@@ -7,7 +7,7 @@
         android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="2048dp"
-            android:layout_height="1280dp" />
+            android:layout_width="1536dp"
+            android:layout_height="960dp" />
     </FrameLayout>
 </com.examples.customtouch.TwoDimensionGestureScrollView>

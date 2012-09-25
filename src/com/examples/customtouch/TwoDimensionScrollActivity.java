@@ -7,6 +7,7 @@ package com.examples.customtouch;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
@@ -21,8 +22,9 @@ public class TwoDimensionScrollActivity extends Activity {
         LinearLayout layout = new LinearLayout(this);
         layout.setOrientation(LinearLayout.VERTICAL);
         for(int i=0; i < 5; i++) {
-    		ImageView iv = new ImageView(this);
+    		ImageButton iv = new ImageButton(this);
 	    	iv.setImageResource(R.drawable.ic_launcher);
+            iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
             layout.addView(iv, new LinearLayout.LayoutParams(1280, 720));
         }
 

@@ -16,7 +16,8 @@ import android.widget.ArrayAdapter;
 public class MainActivity extends ListActivity implements OnItemClickListener {
 
 	private static final String[] ITEMS = {"Pan Example", "Pan Gesture Example",
-		"Multi-Touch Example", "Multi-Touch Gesture Example", "Touch Forward Example", "Touch Delegate Example"};
+		"Multi-Touch Example", "Multi-Touch Gesture Example", "Touch Forward Example",
+            "Touch Delegate Example", "Touch Listener Example"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,8 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
             case 5: //Touch Delegate
                 startActivity(new Intent(this, TouchDelegateActivity.class));
                 break;
+            case 6: //Touch Listener
+                startActivity(new Intent(this, TouchListenerActivity.class));
             default:
                 break;
         }

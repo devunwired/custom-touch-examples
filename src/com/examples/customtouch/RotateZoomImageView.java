@@ -90,8 +90,15 @@ public class RotateZoomImageView extends ImageView {
         //Convert to degrees
         int degrees = (int)(radians * 180 / Math.PI);
 
-        switch (event.getAction()) {
+        /*
+         * Must use getActionMasked() for switching to pick up pointer events.
+         * These events have the pointer index encoded in them so the return
+         * from getAction() won't match the exact action constant.
+         */
+        switch (event.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_POINTER_DOWN:
+            case MotionEvent.ACTION_POINTER_UP:
                 //Mark the initial angle
                 mLastAngle = degrees;
                 break;
@@ -100,7 +107,6 @@ public class RotateZoomImageView extends ImageView {
                 // which creates a point when two fingers are vertical where the
                 // angle flips sign.  We handle this case by rotating a small amount
                 // (5 degrees) in the direction we were traveling
-
                 if ((degrees - mLastAngle) > 45) {
                     //Going CCW across the boundary
                     mImageMatrix.postRotate(-5, mPivotX, mPivotY);
@@ -128,6 +134,7 @@ public class RotateZoomImageView extends ImageView {
             // interest so we can get later multi-touch events.
             return true;
         }
+
 
         switch (event.getPointerCount()) {
             case 3:
