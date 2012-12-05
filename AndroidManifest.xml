@@ -25,7 +25,7 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".MultitouchActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".MultitouchGestureActivity"
+        <activity android:name=".MoveLoggerActivity"
                   android:screenOrientation="portrait"/>
         <activity android:name=".TouchForwardActivity"
                   android:screenOrientation="portrait"/>

@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.CheckBox;
 
 /**
  * Created by Dave Smith
@@ -12,58 +12,31 @@ import android.widget.TextView;
  * Date: 9/25/12
  * TouchListenerActivity
  */
-public class TouchListenerActivity extends Activity {
+public class TouchListenerActivity extends Activity implements View.OnTouchListener {
 
     /* Views to display last seen touch event */
-    TextView mParentState, mChildState;
+    CheckBox mLockBox;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.touch_listener);
 
-        mParentState = (TextView) findViewById(R.id.text_parent);
-        mChildState = (TextView) findViewById(R.id.text_child);
+        mLockBox = (CheckBox) findViewById(R.id.checkbox_lock);
 
-        findViewById(R.id.container).setOnTouchListener(mParentTouchListener);
-        findViewById(R.id.button).setOnTouchListener(mChildTouchListener);
-        findViewById(R.id.view).setOnTouchListener(mChildTouchListener);
+        findViewById(R.id.selection_first).setOnTouchListener(this);
+        findViewById(R.id.selection_second).setOnTouchListener(this);
+        findViewById(R.id.selection_third).setOnTouchListener(this);
     }
 
-    /*
-     * This method is a great place to monitor all touch events that come in to the
-     * Activity, because it is always called first.  Here we use it to reset our state
-     * display views on each new gesture.
-     */
     @Override
-    public boolean dispatchTouchEvent(MotionEvent event) {
-        //Clear status fields on a new gesture
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            mParentState.setText(null);
-            mChildState.setText(null);
-        }
-
-        //Continue normally
-        return super.dispatchTouchEvent(event);
+    public boolean onTouch(View v, MotionEvent event) {
+        /*
+         * Consume the events here so the buttons cannot process them
+         * if the CheckBox in the UI is checked
+         */
+        return mLockBox.isChecked();
     }
-
-    private View.OnTouchListener mParentTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            mParentState.setText( getNameForEvent(event) );
-            //Don't interrupt normal processing
-            return false;
-        }
-    };
-
-    private View.OnTouchListener mChildTouchListener = new View.OnTouchListener() {
-        @Override
-        public boolean onTouch(View v, MotionEvent event) {
-            mChildState.setText( getNameForEvent(event) );
-            //Don't interrupt normal processing
-            return false;
-        }
-    };
 
     private String getNameForEvent(MotionEvent event) {
         String action = "";
