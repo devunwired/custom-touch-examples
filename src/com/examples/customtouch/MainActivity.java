@@ -19,7 +19,7 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
             "Pan Example", "Pan Gesture Example",
 	        "Multi-Touch Example", "Touch Forward Example",
             "Touch Delegate Example", "Touch Listener Example",
-            "Move Logger Example"};
+            "Move Logger Example", "Hover Emulator"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,9 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
                 break;
             case 6: //Move Logger View
                 startActivity(new Intent(this, MoveLoggerActivity.class));
+                break;
+            case 7: //Hover emulator
+                startActivity(new Intent(this, HoverEmulatorActivity.class));
                 break;
             default:
                 break;
