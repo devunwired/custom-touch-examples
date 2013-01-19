@@ -3,7 +3,7 @@
  *
  * See the file license.txt for copying permission.
  */
-package com.examples.customtouch;
+package com.examples.customtouch.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

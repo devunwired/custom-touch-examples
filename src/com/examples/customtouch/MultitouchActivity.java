@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import com.examples.customtouch.widget.RotateZoomImageView;
 
 import java.io.IOException;
 import java.io.InputStream;

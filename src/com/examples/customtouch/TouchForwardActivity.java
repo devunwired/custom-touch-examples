@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import com.examples.customtouch.widget.TouchForwardLayout;
 
 public class TouchForwardActivity extends Activity {
 

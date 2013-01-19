@@ -1,4 +1,4 @@
-package com.examples.customtouch;
+package com.examples.customtouch.widget;
 
 import android.content.Context;
 import android.util.AttributeSet;

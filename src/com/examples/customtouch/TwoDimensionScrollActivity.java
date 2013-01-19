@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import com.examples.customtouch.widget.TwoDimensionScrollView;
 
 public class TwoDimensionScrollActivity extends Activity {
 

@@ -7,6 +7,7 @@ package com.examples.customtouch;
 
 import android.app.Activity;
 import android.os.Bundle;
+import com.examples.customtouch.widget.TouchDelegateLayout;
 
 public class TouchDelegateActivity extends Activity {
 
