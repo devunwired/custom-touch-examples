@@ -33,6 +33,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".TouchListenerActivity"
                   android:screenOrientation="portrait"/>
+        <activity android:name=".TouchInterceptActivity" />
     </application>
 
 </manifest>
