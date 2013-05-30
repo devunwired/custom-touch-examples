@@ -10,7 +10,7 @@
     <application
         android:icon="@drawable/ic_launcher"
         android:label="Touch Examples"
-        android:theme="@android:style/Theme.Black.NoTitleBar" >
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" >
