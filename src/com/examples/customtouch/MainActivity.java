@@ -16,10 +16,10 @@ import android.widget.ArrayAdapter;
 public class MainActivity extends ListActivity implements OnItemClickListener {
 
 	private static final String[] ITEMS = {
+            "Move Logger Example", "Touch Listener Example",
+            "Touch Delegate Example", "Touch Forward Example",
             "Pan Example", "Pan Gesture Example",
-	        "Multi-Touch Example", "Touch Forward Example",
-            "Touch Delegate Example", "Touch Listener Example",
-            "Move Logger Example", "Disable Touch Intercept"};
+	        "Multi-Touch Example", "Disable Touch Intercept"};
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,26 +32,26 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
-            case 0: //2D Scrolling
-                startActivity(new Intent(this, TwoDimensionScrollActivity.class));
+            case 0: //Move Logger View
+                startActivity(new Intent(this, MoveLoggerActivity.class));
                 break;
-            case 1: //2D GestureDetector Scrolling
-                startActivity(new Intent(this, TwoDimensionGestureScrollActivity.class));
+            case 1: //Touch Listener
+                startActivity(new Intent(this, TouchListenerActivity.class));
                 break;
-            case 2: //Multi-Touch Image View
-                startActivity(new Intent(this, MultitouchActivity.class));
+            case 2: //Touch Delegate
+                startActivity(new Intent(this, TouchDelegateActivity.class));
                 break;
             case 3: //Touch Forwarding
                 startActivity(new Intent(this, TouchForwardActivity.class));
                 break;
-            case 4: //Touch Delegate
-                startActivity(new Intent(this, TouchDelegateActivity.class));
+            case 4: //2D Scrolling
+                startActivity(new Intent(this, TwoDimensionScrollActivity.class));
                 break;
-            case 5: //Touch Listener
-                startActivity(new Intent(this, TouchListenerActivity.class));
+            case 5: //2D GestureDetector Scrolling
+                startActivity(new Intent(this, TwoDimensionGestureScrollActivity.class));
                 break;
-            case 6: //Move Logger View
-                startActivity(new Intent(this, MoveLoggerActivity.class));
+            case 6: //Multi-Touch Image View
+                startActivity(new Intent(this, MultitouchActivity.class));
                 break;
             case 7: //Disable Touch Intercept
                 startActivity(new Intent(this, TouchInterceptActivity.class));

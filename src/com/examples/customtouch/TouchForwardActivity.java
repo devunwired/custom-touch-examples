@@ -24,7 +24,8 @@ public class TouchForwardActivity extends Activity {
 		Button button = new Button(this);
 		button.setText("You Can't Miss Me!");
 		
-		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.CENTER);
+		FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT, Gravity.CENTER);
 		layout.addView(button, lp);
 		setContentView(layout);
 	}

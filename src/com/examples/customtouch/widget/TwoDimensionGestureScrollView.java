@@ -83,7 +83,7 @@ public class TwoDimensionGestureScrollView extends FrameLayout {
 		
 		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
 			//Call a helper method to start the scroller animation
-            fling((int)-velocityX/3, (int)-velocityY/3);
+            fling((int)-velocityX/2, (int)-velocityY/2);
 			return true;
 		}
 		
@@ -100,19 +100,10 @@ public class TwoDimensionGestureScrollView extends FrameLayout {
             // This is called at drawing time by ViewGroup.  We use
             // this method to keep the fling animation going through
             // to completion.
-            int oldX = getScrollX();
-            int oldY = getScrollY();
             int x = mScroller.getCurrX();
             int y = mScroller.getCurrY();
 
-            if (getChildCount() > 0) {
-                View child = getChildAt(0);
-                x = clamp(x, getWidth() - getPaddingRight() - getPaddingLeft(), child.getWidth());
-                y = clamp(y, getHeight() - getPaddingBottom() - getPaddingTop(), child.getHeight());
-                if (x != oldX || y != oldY) {
-                    scrollTo(x, y);
-                }
-            }
+            scrollTo(x, y);
 
             // Keep on drawing until the animation has finished.
             postInvalidate();
