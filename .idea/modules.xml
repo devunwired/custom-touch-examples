@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/TouchExamples/TouchExamples.iml" filepath="$PROJECT_DIR$/TouchExamples/TouchExamples.iml" />
       <module fileurl="file://$PROJECT_DIR$/custom-touch-examples.iml" filepath="$PROJECT_DIR$/custom-touch-examples.iml" />
     </modules>
   </component>

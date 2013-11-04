@@ -1,11 +1,20 @@
 #OSX Noise
 .DS_Store
 
-# generated files
+#Gradle Noise
+.gradle/
+
+#Build output
 bin/
 gen/
 out/
+build/
 
-# Local IDE/build configuration files (sdk path, etc)
+#Project Files
+.idea/
+*.iml
+.classpath
+.project
+
+#Ant config files
 local.properties
-.idea/workspace.xml
