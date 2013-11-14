@@ -115,6 +115,57 @@ public class TwoDimensionScrollView extends FrameLayout {
             }
         }
     }
+	
+	/*
+	 * Utility method to initialize the Scroller and start redrawing
+	 */
+	public void fling(int velocityX, int velocityY) {
+        if (getChildCount() > 0) {
+            int height = getHeight() - getPaddingBottom() - getPaddingTop();
+            int width = getWidth() - getPaddingLeft() - getPaddingRight();
+            int bottom = getChildAt(0).getHeight();
+            int right = getChildAt(0).getWidth();
+    
+            mScroller.fling(getScrollX(), getScrollY(), velocityX, velocityY,
+            		0, Math.max(0, right - width),
+            		0, Math.max(0, bottom - height));
+    
+            invalidate();
+        }
+    }
+	
+	/*
+	 * Utility method to assist in doing bounds checking
+	 */
+    private int clamp(int n, int my, int child) {
+        if (my >= child || n < 0) {
+            /* my >= child is this case:
+             *                    |--------------- me ---------------|
+             *     |------ child ------|
+             * or
+             *     |--------------- me ---------------|
+             *            |------ child ------|
+             * or
+             *     |--------------- me ---------------|
+             *                                  |------ child ------|
+             *
+             * n < 0 is this case:
+             *     |------ me ------|
+             *                    |-------- child --------|
+             *     |-- mScrollX --|
+             */
+            return 0;
+        }
+        if ((my+n) > child) {
+            /* this case:
+             *                    |------ me ------|
+             *     |------ child ------|
+             *     |-- mScrollX --|
+             */
+            return child-my;
+        }
+        return n;
+    }
 
     /*
      * Monitor touch events passed down to the children and
@@ -211,56 +262,5 @@ public class TwoDimensionScrollView extends FrameLayout {
                 break;
         }
         return super.onTouchEvent(event);
-    }
-	
-	/*
-	 * Utility method to initialize the Scroller and start redrawing
-	 */
-	public void fling(int velocityX, int velocityY) {
-        if (getChildCount() > 0) {
-            int height = getHeight() - getPaddingBottom() - getPaddingTop();
-            int width = getWidth() - getPaddingLeft() - getPaddingRight();
-            int bottom = getChildAt(0).getHeight();
-            int right = getChildAt(0).getWidth();
-    
-            mScroller.fling(getScrollX(), getScrollY(), velocityX, velocityY,
-            		0, Math.max(0, right - width),
-            		0, Math.max(0, bottom - height));
-    
-            invalidate();
-        }
-    }
-	
-	/*
-	 * Utility method to assist in doing bounds checking
-	 */
-    private int clamp(int n, int my, int child) {
-        if (my >= child || n < 0) {
-            /* my >= child is this case:
-             *                    |--------------- me ---------------|
-             *     |------ child ------|
-             * or
-             *     |--------------- me ---------------|
-             *            |------ child ------|
-             * or
-             *     |--------------- me ---------------|
-             *                                  |------ child ------|
-             *
-             * n < 0 is this case:
-             *     |------ me ------|
-             *                    |-------- child --------|
-             *     |-- mScrollX --|
-             */
-            return 0;
-        }
-        if ((my+n) > child) {
-            /* this case:
-             *                    |------ me ------|
-             *     |------ child ------|
-             *     |-- mScrollX --|
-             */
-            return child-my;
-        }
-        return n;
     }
 }

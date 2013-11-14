@@ -70,29 +70,6 @@ public class TwoDimensionGestureScrollView extends FrameLayout {
 
         child.measure(childWidthMeasureSpec, childHeightMeasureSpec);
     }
-
-    //Listener to handle all the touch events
-	private SimpleOnGestureListener mListener = new SimpleOnGestureListener() {
-		public boolean onDown(MotionEvent e) {
-			//Cancel any current fling
-            if (!mScroller.isFinished()) {
-				mScroller.abortAnimation();
-			}
-			return true;
-		}
-		
-		public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-			//Call a helper method to start the scroller animation
-            fling((int)-velocityX/2, (int)-velocityY/2);
-			return true;
-		}
-		
-		public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-			//Any view can be scrolled by simply calling its scrollBy() method
-			scrollBy((int)distanceX, (int)distanceY);
-			return true;
-		}
-	};
 	
 	@Override
 	public void computeScroll() {
@@ -122,45 +99,6 @@ public class TwoDimensionGestureScrollView extends FrameLayout {
                 super.scrollTo(x, y);
             }
         }
-    }
-
-    /*
-     * Monitor touch events passed down to the children and
-     * intercept as soon as it is determined we are dragging
-     */
-    @Override
-    public boolean onInterceptTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mInitialX = event.getX();
-                mInitialY = event.getY();
-                //Feed the down event to the detector so it has
-                // context when/if dragging begins
-                mDetector.onTouchEvent(event);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                final float x = event.getX();
-                final float y = event.getY();
-                final int yDiff = (int) Math.abs(y - mInitialY);
-                final int xDiff = (int) Math.abs(x - mInitialX);
-                //Verify that either difference is enough to be a drag
-                if (yDiff > mTouchSlop || xDiff > mTouchSlop) {
-                    //Start capturing events
-                    return true;
-                }
-                break;
-        }
-
-        return super.onInterceptTouchEvent(event);
-    }
-
-    /*
-     * Feed all touch events we receive to the detector for
-     * processing.
-     */
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return mDetector.onTouchEvent(event);
     }
 	
 	/*
@@ -212,5 +150,67 @@ public class TwoDimensionGestureScrollView extends FrameLayout {
             return child-my;
         }
         return n;
+    }
+
+    //Listener to handle all the touch events
+    private SimpleOnGestureListener mListener = new SimpleOnGestureListener() {
+        public boolean onDown(MotionEvent e) {
+            //Cancel any current fling
+            if (!mScroller.isFinished()) {
+                mScroller.abortAnimation();
+            }
+            return true;
+        }
+
+        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+            //Call a helper method to start the scroller animation
+            fling((int)-velocityX/2, (int)-velocityY/2);
+            return true;
+        }
+
+        public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
+            //Any view can be scrolled by simply calling its scrollBy() method
+            scrollBy((int)distanceX, (int)distanceY);
+            return true;
+        }
+    };
+
+    /*
+     * Monitor touch events passed down to the children and
+     * intercept as soon as it is determined we are dragging
+     */
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent event) {
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                mInitialX = event.getX();
+                mInitialY = event.getY();
+                //Feed the down event to the detector so it has
+                // context when/if dragging begins
+                mDetector.onTouchEvent(event);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                final float x = event.getX();
+                final float y = event.getY();
+                final int yDiff = (int) Math.abs(y - mInitialY);
+                final int xDiff = (int) Math.abs(x - mInitialX);
+                //Verify that either difference is enough to be a drag
+                if (yDiff > mTouchSlop || xDiff > mTouchSlop) {
+                    //Start capturing events
+                    return true;
+                }
+                break;
+        }
+
+        return super.onInterceptTouchEvent(event);
+    }
+
+    /*
+     * Feed all touch events we receive to the detector for
+     * processing.
+     */
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return mDetector.onTouchEvent(event);
     }
 }
