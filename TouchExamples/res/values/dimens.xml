@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="header_height">160dp</dimen>
+    <dimen name="pan_content_width">1280dp</dimen>
+    <dimen name="pan_content_height">720dp</dimen>
 </resources>

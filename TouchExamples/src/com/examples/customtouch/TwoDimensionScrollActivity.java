@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
 import com.examples.customtouch.widget.TwoDimensionScrollView;
 
 public class TwoDimensionScrollActivity extends Activity {
@@ -26,7 +27,9 @@ public class TwoDimensionScrollActivity extends Activity {
     		ImageButton iv = new ImageButton(this);
 	    	iv.setImageResource(R.drawable.ic_launcher);
             iv.setScaleType(ImageView.ScaleType.FIT_CENTER);
-            layout.addView(iv, new LinearLayout.LayoutParams(1280, 720));
+            int width = getResources().getDimensionPixelSize(R.dimen.pan_content_width);
+            int height = getResources().getDimensionPixelSize(R.dimen.pan_content_height);
+            layout.addView(iv, new LinearLayout.LayoutParams(width, height));
         }
 
 		scrollView.addView(layout);
