@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 /**
  * Created by Dave Smith
- * Xcellent Creations, Inc.
+ * Double Encore, Inc.
  * Date: 1/19/13
  * TouchInterceptActivity
  */

@@ -10,7 +10,7 @@ import android.view.ViewConfiguration;
 
 /**
  * Created by Dave Smith
- * Xcellent Creations, Inc.
+ * Double Encore, Inc.
  * Date: 9/24/12
  * MoveLoggerActivity
  */

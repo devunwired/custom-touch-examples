@@ -8,7 +8,7 @@ import android.widget.CheckBox;
 
 /**
  * Created by Dave Smith
- * Xcellent Creations, Inc.
+ * Double Encore, Inc.
  * Date: 9/25/12
  * TouchListenerActivity
  */
