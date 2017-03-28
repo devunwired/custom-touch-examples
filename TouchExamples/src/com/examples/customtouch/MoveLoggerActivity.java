@@ -1,8 +1,8 @@
 package com.examples.customtouch;
 
-import android.app.Activity;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,7 +14,8 @@ import android.view.ViewConfiguration;
  * Date: 9/24/12
  * MoveLoggerActivity
  */
-public class MoveLoggerActivity extends Activity implements View.OnTouchListener {
+public class MoveLoggerActivity extends AppCompatActivity implements
+        View.OnTouchListener {
 
     public static final String TAG = "MoveLoggerActivity";
 

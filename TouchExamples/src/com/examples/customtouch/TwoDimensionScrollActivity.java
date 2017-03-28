@@ -5,15 +5,15 @@
  */
 package com.examples.customtouch;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.examples.customtouch.widget.TwoDimensionScrollView;
 
-public class TwoDimensionScrollActivity extends Activity {
+public class TwoDimensionScrollActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

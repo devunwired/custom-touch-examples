@@ -5,15 +5,16 @@
  */
 package com.examples.customtouch;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.FrameLayout;
+
 import com.examples.customtouch.widget.TouchForwardLayout;
 
-public class TouchForwardActivity extends Activity {
+public class TouchForwardActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

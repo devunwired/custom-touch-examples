@@ -5,15 +5,16 @@
  */
 package com.examples.customtouch;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
-public class MainActivity extends ListActivity implements OnItemClickListener {
+public class MainActivity extends AppCompatActivity implements
+        AdapterView.OnItemClickListener {
 
 	private static final String[] ITEMS = {
             "Move Logger Example", "Touch Listener Example",
@@ -24,9 +25,12 @@ public class MainActivity extends ListActivity implements OnItemClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        ListView list = new ListView(this);
+        setContentView(list);
+
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ITEMS);
-		getListView().setAdapter(adapter);
-		getListView().setOnItemClickListener(this);
+		list.setAdapter(adapter);
+		list.setOnItemClickListener(this);
 	}
 
 	@Override

@@ -1,9 +1,10 @@
 package com.examples.customtouch;
 
-import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
 import com.examples.customtouch.widget.RotateZoomImageView;
 
 import java.io.IOException;
@@ -15,7 +16,7 @@ import java.io.InputStream;
  * Date: 9/24/12
  * MultitouchActivity
  */
-public class MultitouchActivity extends Activity {
+public class MultitouchActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

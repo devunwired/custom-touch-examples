@@ -1,10 +1,10 @@
 package com.examples.customtouch;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +19,8 @@ import android.widget.TextView;
  * Date: 1/19/13
  * TouchInterceptActivity
  */
-public class TouchInterceptActivity extends Activity implements ViewPager.OnPageChangeListener {
+public class TouchInterceptActivity extends AppCompatActivity implements
+        ViewPager.OnPageChangeListener {
 
     private ViewPager mViewPager;
     private ListView mListView;

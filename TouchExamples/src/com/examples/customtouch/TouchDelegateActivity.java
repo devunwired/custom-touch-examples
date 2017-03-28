@@ -5,11 +5,12 @@
  */
 package com.examples.customtouch;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
 import com.examples.customtouch.widget.TouchDelegateLayout;
 
-public class TouchDelegateActivity extends Activity {
+public class TouchDelegateActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

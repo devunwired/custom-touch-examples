@@ -1,7 +1,7 @@
 package com.examples.customtouch;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
@@ -12,7 +12,8 @@ import android.widget.CheckBox;
  * Date: 9/25/12
  * TouchListenerActivity
  */
-public class TouchListenerActivity extends Activity implements View.OnTouchListener {
+public class TouchListenerActivity extends AppCompatActivity implements
+        View.OnTouchListener {
 
     /* Views to display last seen touch event */
     CheckBox mLockBox;
